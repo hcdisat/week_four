@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WeekFour</string>
-    <string name="title_home">Home</string>
+    <string name="title_random">Random</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="joke_text">Chuck Norris and Mr. T walked into a bar. The bar was instantly destroyed, as that level of awesome cannot be contained in one building.</string>
 </resources>
