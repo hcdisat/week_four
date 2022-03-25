@@ -2,7 +2,7 @@ package com.hcdisat.weekfour.di
 
 import com.google.gson.Gson
 import com.hcdisat.weekfour.network.JokesWebApi
-import com.hcdisat.weekfour.ui.random.RandomViewModel
+import com.hcdisat.weekfour.viewmodels.JokesViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -66,5 +66,5 @@ val restApiModule = module {
 
 val viewModelsModule = module {
 
-    viewModel { RandomViewModel(get()) }
+    viewModel { JokesViewModel(get()) }
 }

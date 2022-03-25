@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/random_home"
-        android:name="com.hcdisat.weekfour.ui.random.RandomFragment"
+        android:name="com.hcdisat.weekfour.ui.RandomFragment"
         android:label="@string/title_random"
         tools:layout="@layout/fragment_random" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hcdisat.weekfour.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_custom_name_joke"
+        android:name="com.hcdisat.weekfour.ui.CustomNameJokeFragment"
+        android:label="@string/title_custom_name"
+        tools:layout="@layout/fragment_custom_name_joke" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.hcdisat.weekfour.ui.notifications.NotificationsFragment"
+        android:name="com.hcdisat.weekfour.ui.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

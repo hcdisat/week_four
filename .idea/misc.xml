@@ -3,8 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/dialog_back_ground.xml" value="0.246" />
+        <entry key="app/src/main/res/drawable/dialog_background.xml" value="0.3485" />
+        <entry key="app/src/main/res/drawable/ic_dismiss.xml" value="0.246" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1335" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1335" />
         <entry key="app/src/main/res/drawable/ic_smile.xml" value="0.3485" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_custom_name_joke.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/layout/fragment_random.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_random_joke_dialog.xml" value="0.21944444444444444" />
+        <entry key="app/src/main/res/layout/get_joke_btn.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/laoding_joke.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/loading_joke.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/random_joke_dialog.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35833333333333334" />
       </map>
