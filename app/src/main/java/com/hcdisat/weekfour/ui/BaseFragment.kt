@@ -24,7 +24,7 @@ abstract class BaseFragment : Fragment() {
     /**
      * handles UI Error state
      */
-    private fun showError(throwable: Throwable) {
+    protected open fun showError(throwable: Throwable) {
         Log.d("TAG", throwable.localizedMessage!!)
         canRequestJoke(true)
     }

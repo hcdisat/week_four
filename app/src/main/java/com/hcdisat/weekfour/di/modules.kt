@@ -66,7 +66,8 @@ val restApiModule = module {
     /**
      * provides [JokesApiRepositoryContract]
      */
-    fun providesJokesApiRepository(jokesWebApi: JokesWebApi) = JokesApiRepository(jokesWebApi)
+    fun providesJokesApiRepository(jokesWebApi: JokesWebApi): JokesApiRepositoryContract =
+        JokesApiRepository(jokesWebApi)
 
     single { providesJokesApiRepository(get()) }
     single { providesRetrofitService(get(), get()) }
@@ -77,7 +78,7 @@ val restApiModule = module {
 
 val viewModelsModule = module {
 
-    viewModel { JokesViewModel(get()) }
+    viewModel { JokesViewModel(get(), get()) }
 }
 
 val databaseModule = module {
@@ -85,12 +86,12 @@ val databaseModule = module {
     /**
      * provides [JokesDatabase]
      */
-    fun providesDatabase(context: Context) =
+    fun providesDatabase(context: Context): JokesDatabase =
         Room.databaseBuilder(
             context,
             JokesDatabase::class.java,
             DB_NAME
-        )
+        ).build()
 
     /**
      * provides [JokesDao]
@@ -100,7 +101,8 @@ val databaseModule = module {
     /**
      * provides [DatabaseRepository]
      */
-    fun providesDatabaseRepository(jokesDao: JokesDao) = DatabaseRepository(jokesDao)
+    fun providesDatabaseRepository(jokesDao: JokesDao): DatabaseRepositoryContract =
+        DatabaseRepository(jokesDao)
 
     single { providesDatabase(get()) }
     single { providesJokesDao(get()) }

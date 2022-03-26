@@ -10,6 +10,7 @@ import com.hcdisat.weekfour.adapters.JokesAdapter
 import com.hcdisat.weekfour.databinding.FragmentJokeListBinding
 import com.hcdisat.weekfour.models.JokeList
 import com.hcdisat.weekfour.dataaccess.network.EndPoints
+import com.hcdisat.weekfour.models.Joke
 import com.hcdisat.weekfour.ui.state.UIState
 
 class JokeListFragment : BaseFragment() {
@@ -40,7 +41,7 @@ class JokeListFragment : BaseFragment() {
 
                     if (!isListLoading) {
                         if (linearLayoutManager.findLastVisibleItemPosition() == jokesAdapter.itemCount - 1) {
-                            jokesViewModel.getJoke()
+                            jokesViewModel.getJokes()
                         }
                     }
                 }
@@ -55,7 +56,7 @@ class JokeListFragment : BaseFragment() {
     ): View {
         _binding = FragmentJokeListBinding.inflate(inflater, container, false)
 
-        jokesViewModel.randomJoke.observe(viewLifecycleOwner, ::handleResponse)
+        jokesViewModel.jokesState.observe(viewLifecycleOwner, ::handleResponse)
         jokesViewModel.endPoint = EndPoints.RANDOM_LIST
         setJokeList()
         return binding.root
@@ -63,20 +64,22 @@ class JokeListFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        jokesViewModel.getJoke()
+        jokesViewModel.getJokes()
     }
 
     override fun handleResponse(uiState: UIState) {
         when (uiState) {
             is UIState.SUCCESS<*> -> {
                 jokesAdapter.restore()
-                jokesAdapter.append((uiState.response as JokeList).value)
+                val jokes = uiState.response as List<*>
+                jokesAdapter.append(jokes.filterIsInstance<Joke>())
                 isListLoading = false
             }
             is UIState.LOADING -> {
                 isListLoading = true
                 jokesAdapter.setLoading()
             }
+            is UIState.ERROR -> showError(uiState.throwable)
             else -> {}
         }
     }

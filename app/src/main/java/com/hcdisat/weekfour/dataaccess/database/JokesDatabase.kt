@@ -2,11 +2,11 @@ package com.hcdisat.weekfour.dataaccess.database
 
 import androidx.room.*
 import com.hcdisat.weekfour.models.Joke
-import retrofit2.http.DELETE
 
 @Database(entities = [Joke::class], version = DB_VERSION)
+@TypeConverters(ListToStringConverters::class)
 abstract class JokesDatabase: RoomDatabase() {
-    abstract fun jokesDao()
+    abstract fun jokesDao(): JokesDao
 }
 
 @Dao
@@ -15,10 +15,10 @@ interface JokesDao {
     @Query("SELECT * FROM joke")
     suspend fun getAll(): List<Joke>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAll(jokes: List<Joke>)
 
-    @DELETE
+    @Query("DELETE FROM joke")
     suspend fun deleteAll()
 }
 

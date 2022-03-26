@@ -2,8 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_joke_list">
+    android:id="@+id/navigation_joke_list"
+    app:startDestination="@+id/configFragment">
 
     <fragment
         android:id="@+id/random_home"
@@ -22,4 +22,10 @@
         android:name="com.hcdisat.weekfour.ui.JokeListFragment"
         android:label="@string/title_joke_list"
         tools:layout="@layout/fragment_joke_list" />
+
+    <fragment
+        android:id="@+id/configFragment"
+        android:name="com.hcdisat.weekfour.ui.ConfigFragment"
+        android:label="@string/settings_title"
+        tools:layout="@layout/fragment_config" />
 </navigation>

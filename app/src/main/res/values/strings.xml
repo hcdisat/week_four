@@ -4,10 +4,14 @@
     <string name="title_custom_name">Custom Joke</string>
     <string name="title_joke_list">Joke List</string>
     <string name="joke_text">Chuck Norris and Mr. T walked into a bar. The bar was instantly destroyed, as that level of awesome cannot be contained in one building.</string>
-<!--    <string name="btn_new_joke_text">New Joke</string>-->
+    <!--    <string name="btn_new_joke_text">New Joke</string>-->
     <string name="btn_new_joke_text">Get Joke!</string>
     <string name="new_random_joke_text">Request new joke!</string>
     <string name="insert_a_name_text">Insert a name below!!\nAnd get a joke</string>
     <string name="text_full_name">Full name</string>
     <string name="joke">Chuck Norris can unit test entire applications with a single assert.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_title">Settings</string>
+    <string name="config_explicit_jokes">Allow Explicit Jokes</string>
 </resources>

@@ -40,7 +40,7 @@ class CustomNameJokeFragment : BaseFragment() {
         _binding = FragmentCustomNameJokeBinding.inflate(inflater, container, false)
 
         jokesViewModel.endPoint = EndPoints.CUSTOM
-        jokesViewModel.randomJoke.observe(viewLifecycleOwner, ::handleResponse)
+        jokesViewModel.state.observe(viewLifecycleOwner, ::handleResponse)
 
         binding.btnContainer.btnNewJoke.isEnabled = false
         binding.textName.addTextChangedListener{

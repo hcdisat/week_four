@@ -35,7 +35,7 @@ class RandomFragment : BaseFragment() {
 
         // observer livedata
         jokesViewModel.endPoint = EndPoints.RANDOM
-        jokesViewModel.randomJoke.observe(viewLifecycleOwner, ::handleResponse)
+        jokesViewModel.state.observe(viewLifecycleOwner, ::handleResponse)
 
         // do api call
         binding.btnContainer.btnNewJoke.setOnClickListener {
