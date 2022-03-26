@@ -49,10 +49,15 @@ class JokesViewModel(
         _randomJoke.value = UIState.LOADING
         viewModelScope.launch(ioDispatcher) {
             try {
-                val response = requestJoke(args)
+
+                val response = when(endPoint) {
+                    EndPoints.RANDOM_LIST -> api.getRandom(JokesWebApi.JOKES_LOAD_SIZE)
+                    else -> requestJoke(args)
+                }
+
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        _randomJoke.postValue(UIState.SUCCESS(it.value))
+                        _randomJoke.postValue(UIState.SUCCESS(it))
                     } ?: throw EmptyResponseException()
                 } else {
                     throw ServerErrorResponseException()
@@ -92,6 +97,7 @@ class JokesViewModel(
         return when (endPoint) {
             EndPoints.RANDOM -> api.getRandom()
             EndPoints.CUSTOM -> getCustomJoke(fullName)
+            else -> api.getRandom()
         }
     }
 }

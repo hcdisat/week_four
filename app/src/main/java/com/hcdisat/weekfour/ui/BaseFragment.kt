@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 /**
  * [BaseFragment] is used to control common behavior and state between its children fragments
  */
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
     // view model used to handle business logic
     protected val jokesViewModel: JokesViewModel by sharedViewModel()
@@ -22,13 +22,28 @@ abstract class BaseFragment: Fragment() {
     private lateinit var dialogFragment: JokeDialogFragment
 
     /**
+     * handles UI Error state
+     */
+    private fun showError(throwable: Throwable) {
+        Log.d("TAG", throwable.localizedMessage!!)
+        canRequestJoke(true)
+    }
+
+    /**
      * Displays the joke too the user
      */
-    private fun <T>showJoke(response: T) {
-        jokesViewModel.selectedJoke =
-            if (response is Jokes) (response as Jokes).value
-            else response as Joke
+    protected fun <T> handleJoke(response: T) {
+        if (response is Joke)
+            showJoke(response)
+        if (response is Jokes)
+            showJoke(response.value)
+    }
 
+    /**
+     * Displays the joke too the user
+     */
+    private fun showJoke(response: Joke) {
+        jokesViewModel.selectedJoke = response
         dialogFragment = JokeDialogFragment
             .newRandomJokeDialog().apply {
                 isCancelable = false
@@ -43,19 +58,11 @@ abstract class BaseFragment: Fragment() {
     }
 
     /**
-     * handles UI Error state
-     */
-    private fun showError(throwable: Throwable) {
-        Log.d("TAG", throwable.localizedMessage!!)
-        canRequestJoke(true)
-    }
-
-    /**
      * handles UI State through [UIState]
      */
-    protected fun handleResponse(uiState: UIState) {
+    protected open fun handleResponse(uiState: UIState) {
         when (uiState) {
-            is UIState.SUCCESS<*> -> showJoke(uiState.response)
+            is UIState.SUCCESS<*> -> handleJoke(uiState.response)
             is UIState.LOADING -> canRequestJoke(false)
             is UIState.DEFAULT -> canRequestJoke(true)
             is UIState.ERROR -> showError(uiState.throwable)
@@ -65,5 +72,5 @@ abstract class BaseFragment: Fragment() {
     /**
      * handles main views visibility and loading behavior
      */
-    protected abstract fun canRequestJoke(canRequestJoke: Boolean = true)
+    protected open fun canRequestJoke(canRequestJoke: Boolean = true) {}
 }

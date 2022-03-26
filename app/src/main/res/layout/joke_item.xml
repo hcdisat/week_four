@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:elevation="15dp">
+
+        <TextView
+            android:id="@+id/joke_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:textAlignment="center"
+            android:text="@string/joke"
+            android:textSize="18sp"
+            android:background="@color/white"
+            android:textColor="@color/material_dynamic_neutral20"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
