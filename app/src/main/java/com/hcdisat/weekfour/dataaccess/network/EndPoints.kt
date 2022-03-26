@@ -1,4 +1,4 @@
-package com.hcdisat.weekfour.network
+package com.hcdisat.weekfour.dataaccess.network
 
 enum class EndPoints {
     RANDOM,

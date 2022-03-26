@@ -1,6 +1,7 @@
 package com.hcdisat.weekfour
 
 import android.app.Application
+import com.hcdisat.weekfour.di.databaseModule
 import com.hcdisat.weekfour.di.restApiModule
 import com.hcdisat.weekfour.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +17,8 @@ class JokesApp: Application() {
             modules(
                 listOf(
                     restApiModule,
-                    viewModelsModule
+                    viewModelsModule,
+                    databaseModule
                 )
             )
         }

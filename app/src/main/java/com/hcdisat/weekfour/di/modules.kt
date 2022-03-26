@@ -1,7 +1,12 @@
 package com.hcdisat.weekfour.di
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
-import com.hcdisat.weekfour.network.JokesWebApi
+import com.hcdisat.weekfour.dataaccess.database.*
+import com.hcdisat.weekfour.dataaccess.network.JokesApiRepository
+import com.hcdisat.weekfour.dataaccess.network.JokesApiRepositoryContract
+import com.hcdisat.weekfour.dataaccess.network.JokesWebApi
 import com.hcdisat.weekfour.viewmodels.JokesViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -58,6 +63,12 @@ val restApiModule = module {
             .client(okHttpClient)
             .build().create(JokesWebApi::class.java)
 
+    /**
+     * provides [JokesApiRepositoryContract]
+     */
+    fun providesJokesApiRepository(jokesWebApi: JokesWebApi) = JokesApiRepository(jokesWebApi)
+
+    single { providesJokesApiRepository(get()) }
     single { providesRetrofitService(get(), get()) }
     single { providesOkHttpClient(get()) }
     single { providesLoggingInterceptor() }
@@ -67,4 +78,31 @@ val restApiModule = module {
 val viewModelsModule = module {
 
     viewModel { JokesViewModel(get()) }
+}
+
+val databaseModule = module {
+
+    /**
+     * provides [JokesDatabase]
+     */
+    fun providesDatabase(context: Context) =
+        Room.databaseBuilder(
+            context,
+            JokesDatabase::class.java,
+            DB_NAME
+        )
+
+    /**
+     * provides [JokesDao]
+     */
+    fun providesJokesDao(database: JokesDatabase) = database.jokesDao()
+
+    /**
+     * provides [DatabaseRepository]
+     */
+    fun providesDatabaseRepository(jokesDao: JokesDao) = DatabaseRepository(jokesDao)
+
+    single { providesDatabase(get()) }
+    single { providesJokesDao(get()) }
+    single { providesDatabaseRepository(get()) }
 }

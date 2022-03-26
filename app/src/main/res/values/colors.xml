@@ -10,4 +10,7 @@
 
     <color name="colorPrimary">#FF191C1E</color>
     <color name="colorOnPrimary">#FF2A3136</color>
+    <color name="colorBackground">#FF2A3136</color>
+    <color name="colorDialogBackground">#FF191C1E</color>
+    <color name="colorDialogBorder">#FF5C5F61</color>
 </resources>

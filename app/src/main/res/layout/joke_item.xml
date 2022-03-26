@@ -21,7 +21,7 @@
             android:text="@string/joke"
             android:textSize="18sp"
             android:background="@color/white"
-            android:textColor="@color/material_dynamic_neutral20"/>
+            android:textColor="@color/colorPrimary"/>
 
     </com.google.android.material.card.MaterialCardView>
 

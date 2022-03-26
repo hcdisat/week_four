@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hcdisat.weekfour.adapters.JokesAdapter
 import com.hcdisat.weekfour.databinding.FragmentJokeListBinding
 import com.hcdisat.weekfour.models.JokeList
-import com.hcdisat.weekfour.network.EndPoints
+import com.hcdisat.weekfour.dataaccess.network.EndPoints
 import com.hcdisat.weekfour.ui.state.UIState
 
 class JokeListFragment : BaseFragment() {

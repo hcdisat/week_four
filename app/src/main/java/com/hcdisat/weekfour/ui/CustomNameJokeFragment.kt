@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.hcdisat.weekfour.databinding.FragmentCustomNameJokeBinding
-import com.hcdisat.weekfour.network.EndPoints
+import com.hcdisat.weekfour.dataaccess.network.EndPoints
 
 class CustomNameJokeFragment : BaseFragment() {
 

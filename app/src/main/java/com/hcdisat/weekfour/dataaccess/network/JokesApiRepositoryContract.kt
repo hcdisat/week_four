@@ -1,4 +1,4 @@
-package com.hcdisat.weekfour.network
+package com.hcdisat.weekfour.dataaccess.network
 
 import com.hcdisat.weekfour.models.JokeList
 import com.hcdisat.weekfour.models.Jokes

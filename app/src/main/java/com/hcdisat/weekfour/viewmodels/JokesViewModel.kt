@@ -9,8 +9,8 @@ import com.hcdisat.weekfour.exceptioons.InvalidFullNameException
 import com.hcdisat.weekfour.exceptioons.ServerErrorResponseException
 import com.hcdisat.weekfour.models.Joke
 import com.hcdisat.weekfour.models.Jokes
-import com.hcdisat.weekfour.network.EndPoints
-import com.hcdisat.weekfour.network.JokesWebApi
+import com.hcdisat.weekfour.dataaccess.network.EndPoints
+import com.hcdisat.weekfour.dataaccess.network.JokesWebApi
 import com.hcdisat.weekfour.ui.state.UIState
 import com.hcdisat.weekfour.utils.FullNameBuilder
 import com.hcdisat.weekfour.utils.JokeCustomName

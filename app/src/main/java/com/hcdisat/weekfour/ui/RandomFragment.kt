@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hcdisat.weekfour.databinding.FragmentRandomBinding
-import com.hcdisat.weekfour.network.EndPoints
+import com.hcdisat.weekfour.dataaccess.network.EndPoints
 
 class RandomFragment : BaseFragment() {
 
