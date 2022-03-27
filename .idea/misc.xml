@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/baseline_error_outline_24.xml" value="0.253" />
+        <entry key="app/src/main/res/drawable/baseline_face_retouching_natural_24.xml" value="0.1145" />
         <entry key="app/src/main/res/drawable/baseline_wifi_off_24.xml" value="0.253" />
         <entry key="app/src/main/res/drawable/dialog_background.xml" value="0.358" />
         <entry key="app/src/main/res/drawable/ic_smile.xml" value="0.358" />
@@ -15,7 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_random_joke_dialog.xml" value="0.375" />
         <entry key="app/src/main/res/layout/get_joke_btn.xml" value="0.38697916666666665" />
         <entry key="app/src/main/res/layout/joke_item.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

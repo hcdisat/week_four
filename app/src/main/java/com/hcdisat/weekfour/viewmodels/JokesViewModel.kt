@@ -102,7 +102,6 @@ class JokesViewModel(
                 )
                 if (response.isSuccessful) {
                     response.body()?.let {
-//                        databaseRepository.deleteAll()
                         databaseRepository.saveAll(it.value)
                         _jokesState.postValue(UIState.SUCCESS(databaseRepository.getAll()))
                     } ?: throw EmptyResponseException()
