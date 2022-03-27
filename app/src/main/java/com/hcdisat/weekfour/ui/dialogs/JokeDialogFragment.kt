@@ -1,4 +1,4 @@
-package com.hcdisat.weekfour.ui
+package com.hcdisat.weekfour.ui.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,10 +33,8 @@ class JokeDialogFragment(): DialogFragment() {
 
     companion object {
         const val TAG = "JokeDialog"
-
-        fun newRandomJokeDialog(): JokeDialogFragment {
-            return JokeDialogFragment()
+        fun newRandomJokeDialog() = JokeDialogFragment().apply {
+            setStyle(DialogFragment.STYLE_NO_FRAME, 0)
         }
-
     }
 }

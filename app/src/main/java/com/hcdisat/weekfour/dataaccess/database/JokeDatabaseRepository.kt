@@ -3,21 +3,21 @@ package com.hcdisat.weekfour.dataaccess.database
 import com.hcdisat.weekfour.models.Joke
 
 /**
- * [DatabaseRepositoryContract] used to interface database operations
+ * [JokeDatabaseRepositoryContract] used to interface database operations
  */
-interface DatabaseRepositoryContract {
+interface JokeDatabaseRepositoryContract {
     suspend fun getAll(): List<Joke>
     suspend fun saveAll(jokes: List<Joke>)
     suspend fun deleteAll()
 }
 
 /**
- * [DatabaseRepository] implementing [DatabaseRepositoryContract]
+ * [JokeDatabaseRepository] implementing [JokeDatabaseRepositoryContract]
  * used as repository layer to abstract database operations
  */
-class DatabaseRepository(
+class JokeDatabaseRepository(
     private val jokesDao: JokesDao
-) : DatabaseRepositoryContract {
+) : JokeDatabaseRepositoryContract {
     override suspend fun getAll(): List<Joke> = jokesDao.getAll()
     override suspend fun saveAll(jokes: List<Joke>) = jokesDao.saveAll(jokes)
     override suspend fun deleteAll() = jokesDao.deleteAll()

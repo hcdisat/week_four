@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hcdisat.weekfour.dataaccess.database.DatabaseRepositoryContract
+import com.hcdisat.weekfour.dataaccess.database.JokeDatabaseRepositoryContract
+import com.hcdisat.weekfour.dataaccess.database.SettingsDatabaseRepositoryContract
 import com.hcdisat.weekfour.exceptioons.EmptyResponseException
 import com.hcdisat.weekfour.exceptioons.InvalidFullNameException
 import com.hcdisat.weekfour.exceptioons.ServerErrorResponseException
@@ -25,7 +26,8 @@ import java.net.UnknownHostException
 
 class JokesViewModel(
     private val apiRepository: JokesApiRepositoryContract,
-    private val databaseRepository: DatabaseRepositoryContract,
+    private val databaseRepository: JokeDatabaseRepositoryContract,
+    private val settingsDatabaseRepository: SettingsDatabaseRepositoryContract,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
@@ -49,6 +51,11 @@ class JokesViewModel(
     lateinit var selectedJoke: Joke
 
     /**
+     * error state exception used to be displayed in the view
+     */
+    lateinit var stateError: String
+
+    /**
      * selected [List<Joke>] used by different fragments
      */
     lateinit var jokes: List<Joke>
@@ -65,7 +72,9 @@ class JokesViewModel(
         _singleJokeState.value = UIState.LOADING
         viewModelScope.launch(ioDispatcher) {
             try {
-                val response = requestJoke(args)
+                val settings = settingsDatabaseRepository.getSettings()
+                val excludedCategories = getCategories(settings.showExplicitContent)
+                val response = requestJoke(excludedCategories, args)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _singleJokeState.postValue(UIState.SUCCESS(it))
@@ -86,13 +95,17 @@ class JokesViewModel(
         _jokesState.value = UIState.LOADING
         viewModelScope.launch(ioDispatcher) {
             try {
-                val response = apiRepository.getRandom(JokesWebApi.JOKES_LOAD_SIZE)
+                val settings = settingsDatabaseRepository.getSettings()
+                val response = apiRepository.getRandom(
+                    JokesWebApi.JOKES_LOAD_SIZE,
+                    getCategories(settings.showExplicitContent)
+                )
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        databaseRepository.deleteAll()
+//                        databaseRepository.deleteAll()
                         databaseRepository.saveAll(it.value)
                         _jokesState.postValue(UIState.SUCCESS(databaseRepository.getAll()))
-                    }?: throw EmptyResponseException()
+                    } ?: throw EmptyResponseException()
 
                     return@launch
                 }
@@ -102,8 +115,7 @@ class JokesViewModel(
             // no internet connection, here I'm loading what I have in DB
             catch (noConnectionException: UnknownHostException) {
                 _jokesState.postValue(UIState.SUCCESS(databaseRepository.getAll()))
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 _jokesState.postValue(UIState.ERROR(e))
             }
         }
@@ -121,25 +133,32 @@ class JokesViewModel(
      * request custom joke from api
      */
     private suspend fun getCustomJoke(fullNameString: String): Response<Jokes> {
-        var fullName = JokeCustomName("", "")
-        try {
-            fullName = FullNameBuilder.validate(fullNameString)
-        } catch (e: InvalidFullNameException) {
-            _singleJokeState.value = UIState.ERROR(e)
+        FullNameBuilder.validate(fullNameString).also {
+            return apiRepository.getCustom(it.firstName, it.lastName)
         }
-
-        return apiRepository.getCustom(fullName.firstName, fullName.lastName)
     }
 
 
     /**
      * based on selected endpoint return the right suspended method
      */
-    private suspend fun requestJoke(fullName: String = ""): Response<Jokes> {
+    private suspend fun requestJoke(
+        excludedCategories: String,
+        fullName: String = ""
+    ): Response<Jokes> {
         return when (endPoint) {
-            EndPoints.RANDOM -> apiRepository.getRandom()
+            EndPoints.RANDOM -> apiRepository.getRandom(excludedCategories)
             EndPoints.CUSTOM -> getCustomJoke(fullName)
-            else -> apiRepository.getRandom()
+            else -> apiRepository.getRandom(excludedCategories)
         }
     }
+
+    /**
+     * Category filter
+     */
+    private fun getCategories(isExplicit: Boolean) =
+        if (isExplicit) ALL_CATEGORIES else EXPLICIT_CATEGORY
 }
+
+private const val EXPLICIT_CATEGORY = "explicit"
+private const val ALL_CATEGORIES = ""

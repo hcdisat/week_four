@@ -22,3 +22,7 @@ class ServerErrorResponseException(
 class InvalidFullNameException(): Exception("Provided name is not valid") {
     val code = 700
 }
+
+class DatabaseErrorException(): Exception("Something went wrong while accessing the database") {
+    val code = 701
+}

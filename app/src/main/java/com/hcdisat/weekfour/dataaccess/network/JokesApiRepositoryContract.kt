@@ -8,12 +8,15 @@ interface JokesApiRepositoryContract {
     /**
      * gets a random joke
      */
-    suspend fun getRandom(): Response<Jokes>
+    suspend fun getRandom(excludedCategories: String = ""): Response<Jokes>
 
     /**
      * gets the list of jokes
      */
-    suspend fun getRandom(number: Int = JokesWebApi.JOKES_LOAD_SIZE): Response<JokeList>
+    suspend fun getRandom(
+        number: Int = JokesWebApi.JOKES_LOAD_SIZE,
+        excludedCategories: String = ""
+    ): Response<JokeList>
 
     /**
      * gets a random joke with a custom name

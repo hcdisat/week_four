@@ -14,4 +14,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings_title">Settings</string>
     <string name="config_explicit_jokes">Allow Explicit Jokes</string>
+    <string name="exception_text">No network Connection :(\nplease come back later when device connection is reestablished</string>
 </resources>

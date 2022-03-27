@@ -10,9 +10,6 @@ import com.hcdisat.weekfour.dataaccess.network.EndPoints
 class RandomFragment : BaseFragment() {
 
     private var _binding: FragmentRandomBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun canRequestJoke(canRequestJoke: Boolean) {

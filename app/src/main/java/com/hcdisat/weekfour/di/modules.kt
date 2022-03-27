@@ -8,6 +8,7 @@ import com.hcdisat.weekfour.dataaccess.network.JokesApiRepository
 import com.hcdisat.weekfour.dataaccess.network.JokesApiRepositoryContract
 import com.hcdisat.weekfour.dataaccess.network.JokesWebApi
 import com.hcdisat.weekfour.viewmodels.JokesViewModel
+import com.hcdisat.weekfour.viewmodels.SettingsViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -78,7 +79,8 @@ val restApiModule = module {
 
 val viewModelsModule = module {
 
-    viewModel { JokesViewModel(get(), get()) }
+    viewModel { JokesViewModel(get(), get(), get()) }
+    viewModel { SettingsViewModel(get()) }
 }
 
 val databaseModule = module {
@@ -99,12 +101,25 @@ val databaseModule = module {
     fun providesJokesDao(database: JokesDatabase) = database.jokesDao()
 
     /**
-     * provides [DatabaseRepository]
+     * provides [JokeDatabaseRepository]
      */
-    fun providesDatabaseRepository(jokesDao: JokesDao): DatabaseRepositoryContract =
-        DatabaseRepository(jokesDao)
+    fun providesJokeDatabaseRepository(jokesDao: JokesDao): JokeDatabaseRepositoryContract =
+        JokeDatabaseRepository(jokesDao)
+
+    /**
+     * provides [SettingsDao]
+     */
+    fun providesSettingsDao(database: JokesDatabase) = database.settingsDao()
+
+    /**
+     * provides [SettingsDatabaseRepositoryContract]
+     */
+    fun providesSettingsDatabaseRepository(settingsDao: SettingsDao): SettingsDatabaseRepositoryContract =
+        SettingsDatabaseRepository(settingsDao)
 
     single { providesDatabase(get()) }
     single { providesJokesDao(get()) }
-    single { providesDatabaseRepository(get()) }
+    single { providesJokeDatabaseRepository(get()) }
+    single { providesSettingsDao(get()) }
+    single { providesSettingsDatabaseRepository(get()) }
 }

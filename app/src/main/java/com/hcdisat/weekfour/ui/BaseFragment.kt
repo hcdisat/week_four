@@ -1,9 +1,15 @@
 package com.hcdisat.weekfour.ui
 
-import android.util.Log
 import androidx.fragment.app.Fragment
+import com.hcdisat.weekfour.R
+import com.hcdisat.weekfour.exceptioons.DatabaseErrorException
+import com.hcdisat.weekfour.exceptioons.EmptyResponseException
+import com.hcdisat.weekfour.exceptioons.InvalidFullNameException
+import com.hcdisat.weekfour.exceptioons.ServerErrorResponseException
 import com.hcdisat.weekfour.models.Joke
 import com.hcdisat.weekfour.models.Jokes
+import com.hcdisat.weekfour.ui.dialogs.ErrorDialogFragment
+import com.hcdisat.weekfour.ui.dialogs.JokeDialogFragment
 import com.hcdisat.weekfour.ui.state.UIState
 import com.hcdisat.weekfour.viewmodels.JokesViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -17,16 +23,26 @@ abstract class BaseFragment : Fragment() {
     protected val jokesViewModel: JokesViewModel by sharedViewModel()
 
     /**
-     * FragmentDialog used to show a selected joke
-     */
-    private lateinit var dialogFragment: JokeDialogFragment
-
-    /**
      * handles UI Error state
      */
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     protected open fun showError(throwable: Throwable) {
-        Log.d("TAG", throwable.localizedMessage!!)
+        showErrorDialog(throwable.localizedMessage)
         canRequestJoke(true)
+    }
+
+    /**
+     * show error dialog
+     */
+    private fun showErrorDialog(errorMessage: String) {
+        jokesViewModel.stateError = errorMessage
+        (ErrorDialogFragment.newErrorDialogFragment().apply {
+            isCancelable = false
+        }).show(
+            parentFragmentManager,
+            ErrorDialogFragment.TAG
+        )
+        jokesViewModel.resetUIState()
     }
 
     /**
@@ -44,13 +60,11 @@ abstract class BaseFragment : Fragment() {
      */
     private fun showJoke(response: Joke) {
         jokesViewModel.selectedJoke = response
-        dialogFragment = JokeDialogFragment
+        (JokeDialogFragment
             .newRandomJokeDialog().apply {
                 isCancelable = false
-            }
-
-        dialogFragment.show(
-            requireActivity().supportFragmentManager,
+            }).show(
+            parentFragmentManager,
             JokeDialogFragment.TAG
         )
 

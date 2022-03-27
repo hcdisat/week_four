@@ -10,11 +10,14 @@ import retrofit2.http.Query
 interface JokesWebApi {
 
     @GET(RANDOM_PATH)
-    suspend fun getRandom(): Response<Jokes>
+    suspend fun getRandom(
+        @Query("exclude", encoded = true) excludedCategories: String
+    ): Response<Jokes>
 
     @GET(RANDOM_LIST_PATH)
     suspend fun getRandom(
-        @Path("number") number: Int
+        @Path("number") number: Int = JOKES_LOAD_SIZE,
+        @Query("exclude", encoded = true) excludedCategories: String
     ): Response<JokeList>
 
     @GET(RANDOM_PATH)
@@ -24,8 +27,9 @@ interface JokesWebApi {
     ): Response<Jokes>
 
     companion object {
+        // exclude=[nerdy,explicit]
         const val BASE_PATH = "https://api.icndb.com/jokes/"
-        const val JOKES_LOAD_SIZE = 5
+        const val JOKES_LOAD_SIZE = 20
         private const val RANDOM_PATH = "random"
         private const val RANDOM_LIST_PATH = "random/{number}"
     }
