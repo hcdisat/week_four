@@ -31,7 +31,7 @@ class ErrorDialogFragment: DialogFragment() {
         const val TAG = "ErrorDialog"
         fun newErrorDialogFragment() =
             ErrorDialogFragment().apply {
-                setStyle(DialogFragment.STYLE_NO_FRAME, 0)
+                setStyle(STYLE_NO_FRAME, 0)
             }
     }
 }

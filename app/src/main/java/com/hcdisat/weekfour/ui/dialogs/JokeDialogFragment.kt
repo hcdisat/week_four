@@ -9,7 +9,7 @@ import com.hcdisat.weekfour.databinding.FragmentRandomJokeDialogBinding
 import com.hcdisat.weekfour.viewmodels.JokesViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class JokeDialogFragment(): DialogFragment() {
+class JokeDialogFragment: DialogFragment() {
 
     private val binding by lazy {
         FragmentRandomJokeDialogBinding.inflate(layoutInflater)
@@ -34,7 +34,7 @@ class JokeDialogFragment(): DialogFragment() {
     companion object {
         const val TAG = "JokeDialog"
         fun newRandomJokeDialog() = JokeDialogFragment().apply {
-            setStyle(DialogFragment.STYLE_NO_FRAME, 0)
+            setStyle(STYLE_NO_FRAME, 0)
         }
     }
 }

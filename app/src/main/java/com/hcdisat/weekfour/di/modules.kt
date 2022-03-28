@@ -46,7 +46,7 @@ val restApiModule = module {
     fun providesOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .connectTimeout(30L, TimeUnit.SECONDS)
+            .connectTimeout(REQUEST_TIME_OUT, TimeUnit.SECONDS)
             .readTimeout(REQUEST_TIME_OUT, TimeUnit.SECONDS)
             .build()
 
@@ -78,7 +78,6 @@ val restApiModule = module {
 }
 
 val viewModelsModule = module {
-
     viewModel { JokesViewModel(get(), get(), get()) }
     viewModel { SettingsViewModel(get()) }
 }

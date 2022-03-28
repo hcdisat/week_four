@@ -1,6 +1,6 @@
 package com.hcdisat.weekfour.utils
 
-import java.lang.Exception
+import com.hcdisat.weekfour.exceptioons.InvalidFullNameException
 
 /**
  * Name splitting and validation object
@@ -14,7 +14,7 @@ object FullNameBuilder {
         val nameParts = name.split(" ")
 
         if (nameParts.isEmpty() || nameParts.size != MAX_NAME_SIZE)
-            throw Exception("Not valid input")
+            throw InvalidFullNameException()
 
         return JokeCustomName(nameParts[0], nameParts[1])
     }

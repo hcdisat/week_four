@@ -28,7 +28,7 @@ class SettingsViewModel(
                 _state.postValue(SettingsState.SUCCESS(settings))
             }
             catch (e: Exception) {
-                _state.postValue(SettingsState.ERROR(e))
+                _state.postValue(SettingsState.ERROR)
             }
         }
     }
@@ -48,7 +48,7 @@ class SettingsViewModel(
                 _state.postValue(SettingsState.SUCCESS())
 
             } catch (e: Exception) {
-                _state.postValue(SettingsState.ERROR(e))
+                _state.postValue(SettingsState.ERROR)
             }
         }
     }

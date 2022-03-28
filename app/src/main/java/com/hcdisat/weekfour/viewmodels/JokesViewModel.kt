@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.hcdisat.weekfour.dataaccess.database.JokeDatabaseRepositoryContract
 import com.hcdisat.weekfour.dataaccess.database.SettingsDatabaseRepositoryContract
 import com.hcdisat.weekfour.exceptioons.EmptyResponseException
-import com.hcdisat.weekfour.exceptioons.InvalidFullNameException
 import com.hcdisat.weekfour.exceptioons.ServerErrorResponseException
 import com.hcdisat.weekfour.models.Joke
 import com.hcdisat.weekfour.models.Jokes
@@ -16,7 +15,6 @@ import com.hcdisat.weekfour.dataaccess.network.JokesApiRepositoryContract
 import com.hcdisat.weekfour.dataaccess.network.JokesWebApi
 import com.hcdisat.weekfour.ui.state.UIState
 import com.hcdisat.weekfour.utils.FullNameBuilder
-import com.hcdisat.weekfour.utils.JokeCustomName
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

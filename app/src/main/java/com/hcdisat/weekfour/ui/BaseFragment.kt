@@ -1,11 +1,6 @@
 package com.hcdisat.weekfour.ui
 
 import androidx.fragment.app.Fragment
-import com.hcdisat.weekfour.R
-import com.hcdisat.weekfour.exceptioons.DatabaseErrorException
-import com.hcdisat.weekfour.exceptioons.EmptyResponseException
-import com.hcdisat.weekfour.exceptioons.InvalidFullNameException
-import com.hcdisat.weekfour.exceptioons.ServerErrorResponseException
 import com.hcdisat.weekfour.models.Joke
 import com.hcdisat.weekfour.models.Jokes
 import com.hcdisat.weekfour.ui.dialogs.ErrorDialogFragment

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.hcdisat.weekfour.databinding.FragmentConfigBinding
 import com.hcdisat.weekfour.ui.state.SettingsState
-import com.hcdisat.weekfour.ui.state.UIState
 import com.hcdisat.weekfour.viewmodels.SettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -13,5 +13,5 @@ sealed class SettingsState {
     object LOADING: SettingsState()
     object DEFAULT: SettingsState()
     class SUCCESS(val settings: Settings? = null): SettingsState()
-    class ERROR(val throwable: Throwable): SettingsState()
+    object ERROR: SettingsState()
 }

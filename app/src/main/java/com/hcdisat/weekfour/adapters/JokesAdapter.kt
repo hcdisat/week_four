@@ -21,6 +21,9 @@ class JokesAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
+    /**
+     * removes the loading state from recycler view
+     */
     fun restore(notify: Boolean = false) {
         if (jokes.isEmpty()) return
         jokes.removeAt(itemCount - 1)
@@ -71,6 +74,9 @@ class JokesAdapter(
     }
 }
 
+/**
+ * recycler view item view holder
+ */
 class JokesViewHolder(
     private val binding: JokeItemBinding,
     private val onJokeClicked: (joke: Joke) -> Unit
@@ -82,5 +88,7 @@ class JokesViewHolder(
     }
 }
 
-class LoadingJokesViewHolder(view: View): RecyclerView.ViewHolder(view) {
-}
+/**
+ * Loading view holder used to display a progress bar inside recycler view
+ */
+class LoadingJokesViewHolder(view: View): RecyclerView.ViewHolder(view)
