@@ -71,7 +71,7 @@ class JokesViewModel(
         viewModelScope.launch(ioDispatcher) {
             try {
                 val settings = settingsDatabaseRepository.getSettings()
-                val excludedCategories = getCategories(settings.showExplicitContent)
+                val excludedCategories = getCategories(settings.showExplicitContent ?: false)
                 val response = requestJoke(excludedCategories, args)
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -94,9 +94,10 @@ class JokesViewModel(
         viewModelScope.launch(ioDispatcher) {
             try {
                 val settings = settingsDatabaseRepository.getSettings()
+                val categories = getCategories(settings.showExplicitContent ?: false)
                 val response = apiRepository.getRandom(
                     JokesWebApi.JOKES_LOAD_SIZE,
-                    getCategories(settings.showExplicitContent)
+                    categories
                 )
                 if (response.isSuccessful) {
                     response.body()?.let {

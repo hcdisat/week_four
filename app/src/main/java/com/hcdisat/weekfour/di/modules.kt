@@ -87,12 +87,13 @@ val databaseModule = module {
     /**
      * provides [JokesDatabase]
      */
-    fun providesDatabase(context: Context): JokesDatabase =
+    fun providesDatabase(
+        context: Context): JokesDatabase =
         Room.databaseBuilder(
             context,
             JokesDatabase::class.java,
             DB_NAME
-        ).build()
+        ).addCallback(SetUpConfigurationCallBack()).build()
 
     /**
      * provides [JokesDao]
