@@ -79,7 +79,9 @@ class JokeListFragment : BaseFragment() {
                 jokesAdapter.setLoading()
             }
             is UIState.ERROR -> showError(uiState.throwable)
-            else -> {}
+            else -> {
+                //no-op
+            }
         }
     }
 
