@@ -52,7 +52,9 @@ class ConfigFragment : BaseFragment() {
                 canToggleSwitch(true)
             }
             is SettingsState.LOADING -> canToggleSwitch(false)
-            else -> {}
+            else -> {
+                // no-op
+            }
         }
     }
 
